@@ -8,7 +8,7 @@ import java.util.UUID;
 
 import pkgException.DeckException;
 import pkgException.HandException;
-
+import pkgEnum.eBlackJackResult;
 import pkgEnum.eGameType;
 
 public class GamePlayBlackJack extends GamePlay {
@@ -97,40 +97,80 @@ public class GamePlayBlackJack extends GamePlay {
 	
 	public void ScoreGame(GamePlayerHand GPH)
 	{
-		boolean bIsHandWinner = false;
-		//	TODO: Determine if player is a winner
-		
-		
 		HandScoreBlackJack dScore = (HandScoreBlackJack) hDealer.getHS();
 		
-		HandBlackJack pHand = (HandBlackJack) this.gethmGameHand(GPH);
-		
-		HandScoreBlackJack pScore = (HandScoreBlackJack) pHand.getHS();
-		
-		LinkedList pNums = pScore.getNumericScores();
-		LinkedList dNums = dScore.getNumericScores();
-		
-		for(Object o :pNums) {
-			for (Object q :dNums) {
+		Iterator it = this.getHmGameHands().entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			
+			GamePlayerHand kGPH = (GamePlayerHand) pair.getKey();
+			
+			if (kGPH.getGameID() == GPH.getGameID())
+			{
+				HandBlackJack hPlayer = (HandBlackJack) pair.getValue();
 				
-				if(((((int) o <= 21))&&((int) o > (int) q))||(((int) o <= 21)&&((int) q >= 21))){
-					bIsHandWinner = true;
-					break;
-				}
+				HandScoreBlackJack pHSP = null;
 				
+				pHSP = (HandScoreBlackJack) hPlayer.ScoreHand();
+				
+				eBlackJackResult pBJR = CheckScore(dScore,pHSP);
+				
+				hPlayer.seteBJR(pBJR);
+				
+				this.putHandToGame(kGPH, hPlayer);
 				
 			}
-			
-			
+
 		}
-		
-		//	TODO: If Player's hand > Dealer's hand and <= 21, then eBlackJackResult = WIN
-		//			If Player's hand < Dealer's hand and Dealer didn't bust = LOSE
-		//			If Player's hand == Dealer's hand and both didn't bust = TIE
-		
 		
 	}
 
+	private eBlackJackResult CheckScore(HandScoreBlackJack dHSB, HandScoreBlackJack pHSB)
+	{
+		eBlackJackResult eBS = eBlackJackResult.TIE;
+		
+		if (isBusted(pHSB))
+		{
+			return eBlackJackResult.LOSE;
+		}
+		
+		if (isBusted(dHSB))
+		{
+			return eBlackJackResult.WIN;
+		}
+		
+		if ((Integer)dHSB.getNumericScores().getLast() < (Integer)pHSB.getNumericScores().getLast())
+		{
+			return eBlackJackResult.WIN;
+		}
+		else if ((Integer)dHSB.getNumericScores().getLast() > (Integer)pHSB.getNumericScores().getLast())
+		{
+			return eBlackJackResult.LOSE;
+		}
+		
+		return eBS;
+		
+	}
+	
+	
+	private boolean isBusted(HandScoreBlackJack HSB)
+	{
+		boolean isBusted = true;
+		
+		for (Integer i: HSB.getNumericScores())
+		{
+			if (i <= 21)
+			{
+				isBusted = false;
+				break;
+			}
+		}
+		return isBusted;
+		
+	}
+	
+	
+	
 	public Player getpDealer() {
 		return pDealer;
 	}
