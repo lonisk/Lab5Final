@@ -10,6 +10,7 @@ public class Player implements Serializable {
 	private int iPlayerPosition;
 	private int iPokerClientID;
 	
+	
 	public Player(String playerName, int iPokerClientID) {
 		
 		PlayerID = UUID.randomUUID();
