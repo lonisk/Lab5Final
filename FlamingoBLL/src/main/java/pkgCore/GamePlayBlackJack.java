@@ -105,10 +105,8 @@ public class GamePlayBlackJack extends GamePlay {
 	}
 
 	public void ScoreGame(GamePlayerHand GPH) throws HandException {
-		HandScoreBlackJack dScore = (HandScoreBlackJack) hDealer.getHS();
-		if (dScore == null) {
-			dScore = (HandScoreBlackJack) hDealer.ScoreHand();
-		}
+
+		HandScoreBlackJack dScore = (HandScoreBlackJack) hDealer.ScoreHand();
 
 		Iterator it = this.getHmGameHands().entrySet().iterator();
 		while (it.hasNext()) {
@@ -119,24 +117,19 @@ public class GamePlayBlackJack extends GamePlay {
 			if (kGPH.getGameID() == GPH.getGameID()) {
 				HandBlackJack hPlayer = (HandBlackJack) pair.getValue();
 
-				HandScoreBlackJack pHSP = null;
+				HandScoreBlackJack pHSP = (HandScoreBlackJack) hPlayer.ScoreHand();
 
-				pHSP = (HandScoreBlackJack) hPlayer.ScoreHand();
-
-				eBlackJackResult pBJR = CheckScore(dScore, pHSP);
-
-				hPlayer.seteBJR(pBJR);
+				hPlayer.seteBJR(CheckScore(dScore, pHSP));
 
 				this.putHandToGame(kGPH, hPlayer);
 
 			}
-
 		}
 
 	}
 
 	private eBlackJackResult CheckScore(HandScoreBlackJack dHSB, HandScoreBlackJack pHSB) {
-		eBlackJackResult eBS = eBlackJackResult.TIE;
+
 
 		if (isBusted(pHSB)) {
 			return eBlackJackResult.LOSE;
@@ -145,14 +138,26 @@ public class GamePlayBlackJack extends GamePlay {
 		if (isBusted(dHSB)) {
 			return eBlackJackResult.WIN;
 		}
-
-		if ((Integer) dHSB.getNumericScores().getLast() < (Integer) pHSB.getNumericScores().getLast()) {
+		
+		
+		Integer iHiDealerScore = GamePlayBlackJack.ValidScores(dHSB.getNumericScores()).getLast().intValue();
+		Integer iHiPlayerScore = GamePlayBlackJack.ValidScores(dHSB.getNumericScores()).getLast().intValue();
+		
+		
+		if (iHiDealerScore < iHiPlayerScore)
+		{
 			return eBlackJackResult.WIN;
-		} else if ((Integer) dHSB.getNumericScores().getLast() > (Integer) pHSB.getNumericScores().getLast()) {
+		}
+		else if (iHiDealerScore > iHiPlayerScore)
+		{
 			return eBlackJackResult.LOSE;
 		}
+		else
+		{
+			return eBlackJackResult.TIE;
+		}
 
-		return eBS;
+
 
 	}
 
@@ -169,6 +174,13 @@ public class GamePlayBlackJack extends GamePlay {
 		}
 
 		return isBusted;
+
+	}
+
+	public static LinkedList<Integer> ValidScores(LinkedList<Integer> scores) {
+		LinkedList<Integer> tempScores = (LinkedList<Integer>) scores.clone();
+		tempScores.removeIf(p -> p.intValue() > 21);
+		return tempScores;
 
 	}
 
