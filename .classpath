@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="FlamingoBLL/src/main/java"/>
+	<classpathentry kind="src" path="FlamingoBLL/src/main/resources"/>
+	<classpathentry kind="src" path="FlamingoBLL/src/test/java"/>
+	<classpathentry kind="src" path="FlamingoBLL/src/test/resources"/>
+	<classpathentry kind="src" path="FlamingoJabber/src/main/java"/>
+	<classpathentry kind="src" path="FlamingoJabber/src/main/resources"/>
+	<classpathentry kind="src" path="FlamingoJabber/src/test/java"/>
+	<classpathentry kind="src" path="FlamingoJavaFX/src/main/java"/>
+	<classpathentry kind="src" path="FlamingoJavaFX/src/test/java"/>
+	<classpathentry kind="src" path="FlamingoJavaFX/src/test/resources"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

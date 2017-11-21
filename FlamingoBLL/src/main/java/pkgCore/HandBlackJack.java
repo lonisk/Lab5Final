@@ -18,8 +18,8 @@ public class HandBlackJack extends Hand  {
 		Collections.sort(super.getCards());
 		iScores.add(0);
 		
-		for (Card c : super.getCards()) {
-			switch (c.geteRank()) {
+		for (Card crd : super.getCards()) {
+			switch (crd.geteRank()) {
 			case TWO:
 			case THREE:
 			case FOUR:
@@ -29,7 +29,7 @@ public class HandBlackJack extends Hand  {
 			case EIGHT:
 			case NINE:
 			case TEN:
-				ChangeScore(iScores,c.geteRank().getiRankNbr());
+				ChangeScore(iScores,crd.geteRank().getiRankNbr());
 				break;
 			case JACK:
 			case QUEEN:
@@ -40,7 +40,6 @@ public class HandBlackJack extends Hand  {
 				ChangeScore(iScores,1);				
 				iScores.add(new Integer(iScores.getLast() + 10));
 			}
-
 		}
 		
 		HS.setNumericScores(iScores);
@@ -58,9 +57,9 @@ public class HandBlackJack extends Hand  {
 		}
 	}
 	
-	private void AddCardToHand(Card c)
+	private void AddCardToHand(Card crd)
 	{
-		super.AddCard(c);
+		super.AddCard(crd);
 	}
 
 	@Override
@@ -75,8 +74,4 @@ public class HandBlackJack extends Hand  {
 	public void seteBJR(eBlackJackResult eBJR) {
 		this.eBJR = eBJR;
 	}
-
-
-	
-
 }

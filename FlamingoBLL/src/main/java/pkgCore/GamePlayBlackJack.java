@@ -21,9 +21,9 @@ public class GamePlayBlackJack extends GamePlay {
 	public GamePlayBlackJack(HashMap<UUID, Player> hmTablePlayers, Deck dGameDeck) {
 
 		super(eGameType.BLACKJACK, hmTablePlayers, dGameDeck);
-		Iterator it = hmTablePlayers.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
+		Iterator itt = hmTablePlayers.entrySet().iterator();
+		while (itt.hasNext()) {
+			Map.Entry pair = (Map.Entry) itt.next();
 			Player p = (Player) pair.getValue();
 			Hand h = new HandBlackJack();
 			GamePlayerHand GPH = new GamePlayerHand(this.getGameID(), p.getPlayerID(), h.getHandID());
@@ -34,48 +34,38 @@ public class GamePlayBlackJack extends GamePlay {
 	@Override
 	protected Card Draw(GamePlayerHand GPH) throws DeckException, HandException {
 
-		Card c = null;
-
+		Card crd = null;
 		if (bCanPlayerDraw(GPH)) {
 			Hand h = this.gethmGameHand(GPH);
-			c = h.Draw(this.getdGameDeck());
-
-			h.AddCard(c);
-
+			crd = h.Draw(this.getdGameDeck());
+			h.AddCard(crd);
 			this.putHandToGame(GPH, h);
-
 		}
-		return c;
+		return crd;
 	}
 
-	public void Draw(GamePlayerHand GPH, Card c) throws DeckException, HandException {
+	public void Draw(GamePlayerHand GPH, Card crd) throws DeckException, HandException {
 
 		if (bCanPlayerDraw(GPH)) {
 			Hand h = this.gethmGameHand(GPH);
-
-			h.AddCard(c);
-
+			h.AddCard(crd);
 			this.putHandToGame(GPH, h);
-
 		}
 
 	}
 
-	public void setDealerHand(Card c) throws DeckException, HandException {
+	public void setDealerHand(Card crd) throws DeckException, HandException {
 
 		Hand h = hDealer;
-
-		h.AddCard(c);
-
-		// this.putHandToGame(GPH, h);
+		h.AddCard(crd);
 
 	}
 
 	private boolean bCanPlayerDraw(GamePlayerHand GPH) throws HandException {
 		boolean bCanPlayerDraw = false;
 
-		Hand h = this.gethmGameHand(GPH);
-		HandScoreBlackJack HSB = (HandScoreBlackJack) h.ScoreHand();
+		Hand hnd = this.gethmGameHand(GPH);
+		HandScoreBlackJack HSB = (HandScoreBlackJack) hnd.ScoreHand();
 
 		for (Integer i : HSB.getNumericScores()) {
 			if (i <= 21) {
@@ -90,7 +80,6 @@ public class GamePlayBlackJack extends GamePlay {
 
 	public boolean bDoesDealerHaveToDraw() throws HandException {
 		boolean bDoesDealerHaveToDraw = true;
-
 		HandScoreBlackJack HSB = (HandScoreBlackJack) hDealer.ScoreHand();
 
 		for (Integer i : HSB.getNumericScores()) {
@@ -98,7 +87,6 @@ public class GamePlayBlackJack extends GamePlay {
 				bDoesDealerHaveToDraw = false;
 				break;
 			}
-
 		}
 
 		return bDoesDealerHaveToDraw;
@@ -108,19 +96,15 @@ public class GamePlayBlackJack extends GamePlay {
 
 		HandScoreBlackJack dScore = (HandScoreBlackJack) hDealer.ScoreHand();
 
-		Iterator it = this.getHmGameHands().entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
-
+		Iterator itt = this.getHmGameHands().entrySet().iterator();
+		while (itt.hasNext()) {
+			Map.Entry pair = (Map.Entry) itt.next();
 			GamePlayerHand kGPH = (GamePlayerHand) pair.getKey();
 
 			if (kGPH.getGameID() == GPH.getGameID()) {
 				HandBlackJack hPlayer = (HandBlackJack) pair.getValue();
-
 				HandScoreBlackJack pHSP = (HandScoreBlackJack) hPlayer.ScoreHand();
-
 				hPlayer.seteBJR(CheckScore(dScore, pHSP));
-
 				this.putHandToGame(kGPH, hPlayer);
 
 			}
@@ -157,8 +141,6 @@ public class GamePlayBlackJack extends GamePlay {
 			return eBlackJackResult.TIE;
 		}
 
-
-
 	}
 
 	private boolean isBusted(HandScoreBlackJack HSB) {
@@ -168,7 +150,6 @@ public class GamePlayBlackJack extends GamePlay {
 
 			if (i <= 21) {
 				isBusted = false;
-
 				break;
 			}
 		}

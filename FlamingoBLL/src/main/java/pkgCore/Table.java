@@ -14,25 +14,21 @@ public class Table implements Serializable{
 		this.TableID = UUID.randomUUID();
 	}
 	
-	public void AddPlayerToTable(Player p)
+	public void AddPlayerToTable(Player plyer)
 	{
-		hmTablePlayer.put(p.getPlayerID(), p);
+		hmTablePlayer.put(plyer.getPlayerID(), plyer);
 	}
-	public void RemovePlayerFromTable(Player p)
+	public void RemovePlayerFromTable(Player plyer)
 	{
-		hmTablePlayer.remove(p.getPlayerID());
+		hmTablePlayer.remove(plyer.getPlayerID());
 	}
 	
-	public Player GetPlayerFromTable(Player p)
+	public Player GetPlayerFromTable(Player plyer)
 	{
-		return (Player)hmTablePlayer.get(p.getPlayerID());
-
+		return (Player)hmTablePlayer.get(plyer.getPlayerID());
 	}
 
 	public HashMap<UUID, Player> getHmTablePlayer() {
 		return hmTablePlayer;
 	}
-
-	
-	
 }

@@ -13,7 +13,6 @@ public abstract class Hand {
 	private ArrayList<Card> cards;
 	private HandScore HS;
 
-
 	public Hand() {
 		this.HandID = UUID.randomUUID();
 		cards = new ArrayList<Card>();
@@ -23,15 +22,14 @@ public abstract class Hand {
 		return HandID;
 	}
 
-
 	protected ArrayList<Card> getCards() {
 		return cards;
 	}
 
 	public Card Draw(Deck d) throws DeckException {
-		Card c = d.Draw();
-		cards.add(c);
-		return c;
+		Card crd = d.Draw();
+		cards.add(crd);
+		return crd;
 	}
 	
 	protected HandScore getHS() {
@@ -44,10 +42,7 @@ public abstract class Hand {
 
 	public abstract HandScore ScoreHand() throws HandException;
 
-	protected void AddCard(Card c) {
-		cards.add(c);
+	protected void AddCard(Card crd) {
+		cards.add(crd);
 	}
-
-	
-
 }

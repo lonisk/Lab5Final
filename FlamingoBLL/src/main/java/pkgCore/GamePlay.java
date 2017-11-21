@@ -26,20 +26,17 @@ public abstract class GamePlay {
 		this.eGameType = eGameType;
 		
 		// Add a player to the game based on players at the table.
-		Iterator it = hmTablePlayers.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
+		Iterator itt = hmTablePlayers.entrySet().iterator();
+		while (itt.hasNext()) {
+			Map.Entry pair = (Map.Entry) itt.next();
 			Player p = (Player) pair.getValue();
 
-			//TODO: Add the player to the game
 		}
 
 		switch (eGameType) {
 		case BLACKJACK:
-			//TODO: Set the game deck to the existing passed-in deck
 			break;
 		case POKER:
-			//TODO: Set the game deck to a brand new deck
 			break;
 		}
 	}
