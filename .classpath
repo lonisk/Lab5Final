@@ -11,5 +11,6 @@
 	<classpathentry kind="src" path="FlamingoJavaFX/src/main/java"/>
 	<classpathentry kind="src" path="FlamingoJavaFX/src/test/java"/>
 	<classpathentry kind="src" path="FlamingoJavaFX/src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

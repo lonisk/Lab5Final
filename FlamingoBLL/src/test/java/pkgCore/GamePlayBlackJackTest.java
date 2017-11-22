@@ -20,10 +20,11 @@ public class GamePlayBlackJackTest {
 	public void TestPlayerWin() throws DeckException, HandException {
 
 		Table tble = new Table();
-		Player p1 = new Player("Luke", 1);
-		Player p2 = new Player("Alvin", 2);
-		tble.AddPlayerToTable(p1);
-		tble.AddPlayerToTable(p2);
+		Player player1 = new Player("Luke", 1);
+		Player player2 = new Player("Alvin", 2);
+		
+		tble.AddPlayerToTable(player1);
+		tble.AddPlayerToTable(player2);
 		Deck dck = new Deck();
 		GamePlayBlackJack gpBJ = new GamePlayBlackJack(tble.getHmTablePlayer(), dck);
 		Iterator itt = gpBJ.getHmGameHands().entrySet().iterator();
@@ -34,7 +35,7 @@ public class GamePlayBlackJackTest {
 			HandBlackJack hBJ = (HandBlackJack) pair.getValue();
 			GamePlayerHand GPH = (GamePlayerHand) pair.getKey();
 			
-			if (GPH.getPlayerID() == p1.getPlayerID()) {
+			if (GPH.getPlayerID() == player1.getPlayerID()) {
 				gpBJ.putHandToGame(GPH, hBJ);
 				gpBJ.Draw(GPH, new Card(eSuit.DIAMONDS, eRank.NINE));
 				gpBJ.Draw(GPH, new Card(eSuit.DIAMONDS, eRank.QUEEN));
@@ -44,7 +45,7 @@ public class GamePlayBlackJackTest {
 				PH = hBJ;
 			}
 
-			if (GPH.getPlayerID() == p2.getPlayerID()) {
+			if (GPH.getPlayerID() == player2.getPlayerID()) {
 				gpBJ.Draw(GPH, new Card(eSuit.CLUBS, eRank.FIVE));
 				gpBJ.Draw(GPH, new Card(eSuit.CLUBS, eRank.FOUR));
 				gpBJ.putHandToGame(GPH, hBJ);
@@ -71,13 +72,13 @@ public class GamePlayBlackJackTest {
 		Iterator itt = gpBJ.getHmGameHands().entrySet().iterator();
 		GamePlayerHand Test = null;
 		HandBlackJack PH = null;
+		
 		while (itt.hasNext()) {
 			Map.Entry pair = (Map.Entry) itt.next();
 			HandBlackJack hBJ = (HandBlackJack) pair.getValue();
 			GamePlayerHand GPH = (GamePlayerHand) pair.getKey();
 			
 			if (GPH.getPlayerID() == p1.getPlayerID()) {
-				
 				gpBJ.putHandToGame(GPH, hBJ);
 				gpBJ.Draw(GPH, new Card(eSuit.SPADES, eRank.TWO));
 				gpBJ.Draw(GPH, new Card(eSuit.SPADES, eRank.THREE));
@@ -114,13 +115,13 @@ public class GamePlayBlackJackTest {
 		Iterator itt = gpBJ.getHmGameHands().entrySet().iterator();
 		GamePlayerHand Test = null;
 		HandBlackJack PH = null;
+		
 		while (itt.hasNext()) {
 			Map.Entry pair = (Map.Entry) itt.next();
 			HandBlackJack hBJ = (HandBlackJack) pair.getValue();
 			GamePlayerHand GPH = (GamePlayerHand) pair.getKey();
 			
 			if (GPH.getPlayerID() == p1.getPlayerID()) {
-				
 				gpBJ.putHandToGame(GPH, hBJ);
 				gpBJ.Draw(GPH, new Card(eSuit.DIAMONDS, eRank.TWO));
 				gpBJ.Draw(GPH, new Card(eSuit.DIAMONDS, eRank.THREE));
@@ -130,40 +131,40 @@ public class GamePlayBlackJackTest {
 			}
 
 			if (GPH.getPlayerID() == p2.getPlayerID()) {
-				
 				gpBJ.Draw(GPH, new Card(eSuit.DIAMONDS, eRank.FIVE));
 				gpBJ.Draw(GPH, new Card(eSuit.DIAMONDS, eRank.FOUR));
 				gpBJ.putHandToGame(GPH, hBJ);
 			}
 
 		}
-		gpBJ.setDealerHand(new Card(eSuit.DIAMONDS, eRank.TWO));
-		gpBJ.setDealerHand(new Card(eSuit.DIAMONDS, eRank.THREE));
-		gpBJ.ScoreGame(Test);
-		assertEquals(PH.geteBJR(), eBlackJackResult.TIE);
+			gpBJ.setDealerHand(new Card(eSuit.DIAMONDS, eRank.TWO));
+			gpBJ.setDealerHand(new Card(eSuit.DIAMONDS, eRank.THREE));
+			gpBJ.ScoreGame(Test);
+			assertEquals(PH.geteBJR(), eBlackJackResult.TIE);
 	}
 
 	@Test
 	public void TestTwoPlayersWinning() throws DeckException, HandException {
 		
 		Table tble = new Table();
-		Player p1 = new Player("Mike", 1);
-		Player p2 = new Player("John", 2);
-		tble.AddPlayerToTable(p1);
-		tble.AddPlayerToTable(p2);
-		Deck d = new Deck();
-		GamePlayBlackJack gpBJ = new GamePlayBlackJack(tble.getHmTablePlayer(), d);
+		Player player1 = new Player("Mike", 1);
+		Player player2 = new Player("John", 2);
+		tble.AddPlayerToTable(player1);
+		tble.AddPlayerToTable(player2);
+		Deck dck = new Deck();
+		GamePlayBlackJack gpBJ = new GamePlayBlackJack(tble.getHmTablePlayer(), dck);
 		Iterator itt = gpBJ.getHmGameHands().entrySet().iterator();
 		GamePlayerHand Test = null;
 		GamePlayerHand Test2 = null;
 		HandBlackJack PH = null;
 		HandBlackJack JH = null;
+		
 		while (itt.hasNext()) {
 			Map.Entry pair = (Map.Entry) itt.next();
 			HandBlackJack hBJ = (HandBlackJack) pair.getValue();
 			GamePlayerHand GPH = (GamePlayerHand) pair.getKey();
 			
-			if (GPH.getPlayerID() == p1.getPlayerID()) {
+			if (GPH.getPlayerID() == player1.getPlayerID()) {
 				gpBJ.putHandToGame(GPH, hBJ);
 				gpBJ.Draw(GPH, new Card(eSuit.CLUBS, eRank.NINE));
 				gpBJ.Draw(GPH, new Card(eSuit.CLUBS, eRank.QUEEN));
@@ -172,7 +173,7 @@ public class GamePlayBlackJackTest {
 				PH = hBJ;
 			}
 
-			if (GPH.getPlayerID() == p2.getPlayerID()) {
+			if (GPH.getPlayerID() == player2.getPlayerID()) {
 				gpBJ.Draw(GPH, new Card(eSuit.SPADES, eRank.TEN));
 				gpBJ.Draw(GPH, new Card(eSuit.SPADES, eRank.KING));
 				gpBJ.putHandToGame(GPH, hBJ);
@@ -181,11 +182,11 @@ public class GamePlayBlackJackTest {
 			}
 
 		}
-		gpBJ.setDealerHand(new Card(eSuit.HEARTS, eRank.FIVE));
-		gpBJ.setDealerHand(new Card(eSuit.HEARTS, eRank.SIX));
-		gpBJ.ScoreGame(Test);
-		assertEquals(PH.geteBJR(), eBlackJackResult.WIN);
-		gpBJ.ScoreGame(Test2);
-		assertEquals(JH.geteBJR(), eBlackJackResult.WIN);
+			gpBJ.setDealerHand(new Card(eSuit.HEARTS, eRank.FIVE));
+			gpBJ.setDealerHand(new Card(eSuit.HEARTS, eRank.SIX));
+			gpBJ.ScoreGame(Test);
+			assertEquals(PH.geteBJR(), eBlackJackResult.WIN);
+			gpBJ.ScoreGame(Test2);
+			assertEquals(JH.geteBJR(), eBlackJackResult.WIN);
 	}
 }

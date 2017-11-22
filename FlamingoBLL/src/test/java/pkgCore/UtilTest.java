@@ -11,6 +11,7 @@ public class UtilTest {
 	@Test
 	public void TestRemove() {
 		
+		//linked list
 		LinkedList<Integer> LIST = new LinkedList<Integer>();
 				LIST.add(1);
 				LIST.add(10);
@@ -18,6 +19,7 @@ public class UtilTest {
 				LIST.add(22);
 				LIST.add(32);
 		
+		//filter list
 		assertEquals(5,LIST.size());
 		LinkedList<Integer> filLIST = GamePlayBlackJack.ValidScores(LIST);
 		assertEquals(3,filLIST.size());
